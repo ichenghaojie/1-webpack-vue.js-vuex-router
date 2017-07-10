@@ -17,7 +17,7 @@
                             <span class="title">
                                 <template v-if="item.url">
                                     <a :href="item.url" target="_blank">{{ item.title }}</a>
-                                    <span class="host">({{ item.url | host }})</span>
+                                    <span class="host">({{ item.url | urlHost }})</span>
                             </template>
                             <template v-else>
                                 <router-link :to="'/item/' + item.id">{{ item.title }}</router-link>
@@ -96,30 +96,30 @@ export default {
         }
     },
 
-    filters: {
-        host(url){
-            const host = url.replace(/^https?:\/\//, '').replace(/\/.*$/, '')
-            const parts = host.split('.').slice(-3)
-            if(parts[0] === 'www') parts.shift()
-            return parts.join('.')
-        },
-        timeAgo(seconds){
-            const pluralize = function(time, label){
-                if(time === 1){
-                    return time + label
-                }
-                return time + label + 's'
-            }
-            const between = Date.now() / 1000 - Number(seconds)
-            if(between < 3600){
-                return pluralize(~~(between / 60), ' minute')
-            }else if (between < 86400) {
-                return pluralize(~~(between / 3600), ' hour')
-            }else {
-                return pluralize(~~(between / 86400), ' day')
-            }
-        }
-    },
+    // filters: {
+    //     host(url){
+    //         const host = url.replace(/^https?:\/\//, '').replace(/\/.*$/, '')
+    //         const parts = host.split('.').slice(-3)
+    //         if(parts[0] === 'www') parts.shift()
+    //         return parts.join('.')
+    //     },
+    //     timeAgo(seconds){
+    //         const pluralize = function(time, label){
+    //             if(time === 1){
+    //                 return time + label
+    //             }
+    //             return time + label + 's'
+    //         }
+    //         const between = Date.now() / 1000 - Number(seconds)
+    //         if(between < 3600){
+    //             return pluralize(~~(between / 60), ' minute')
+    //         }else if (between < 86400) {
+    //             return pluralize(~~(between / 3600), ' hour')
+    //         }else {
+    //             return pluralize(~~(between / 86400), ' day')
+    //         }
+    //     }
+    // },
 
     methods: {
         loadItems(to = this.page, from = -1){
@@ -191,7 +191,7 @@ export default {
 }
 .top .news-list {
     position: absolute;
-    margin: 70px 0px 30px;
+    margin: 16px 0px 30px;
     padding: 0px;
     width: 100%;
     background-color: #fff;

@@ -58,7 +58,7 @@ const store = new Vuex.Store({
         },
 
         FETCH_ITEMS: ({ commit, state }, { ids }) => {
-            const now = Date.now()
+            const now = Date.now()          
             ids = ids.filter(id => {
                 const item = state.items[id]
                 if(!item){
